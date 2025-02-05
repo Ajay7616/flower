@@ -34,6 +34,15 @@
             }
         }
 
+        @keyframes blink {
+            0%, 50%, 100% {
+                opacity: 1;
+            }
+            25%, 75% {
+                opacity: 0;
+            }
+        }
+
         .stem {
             stroke: white;
             fill: none;
@@ -63,23 +72,22 @@
             fill: white;
             text-anchor: middle;
             transform: translateY(20px) rotate(-10deg); /* Adds slight rotation and spacing */
-            opacity: 0; /* Initially hidden */
+            animation: blink 1.5s infinite; /* Blink animation */
         }
     </style>
     <!-- Add the Dancing Script font for a cursive, signature look -->
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Audio element to play the song in a loop, autoplay enabled -->
-    <audio id="background-music" src="love.mp3" type="audio/mp3" autoplay loop></audio>
+    <!-- Audio element to play the song in a loop, autoplay enabled but will be played after user interaction -->
+    <audio id="background-music" src="love.mp3" type="audio/mp3" loop></audio>
+
     <script>
-        // Wait for the window to load completely
-        window.onload = function() {
-            // Get the audio element by its ID
+        // Wait for a user interaction (click in this case)
+        window.addEventListener("click", function() {
             var audio = document.getElementById('background-music');
-            // Play the audio when the page loads
-            audio.play();
-        };
+            audio.play();  // Play audio when user clicks
+        });
     </script>
     
 
