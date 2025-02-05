@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blooming Flower Animation</title>
+    <title>To the sweetest person</title>
     <style>
         body {
             margin: 0;
@@ -14,13 +14,15 @@
             height: 100vh;
             overflow: hidden;
             flex-direction: column;
+            padding: 0; /* Ensures no extra spacing */
         }
 
         svg {
+            position: relative;
             width: 100%;
-            max-width: 100%; /* Ensures mobile responsiveness */
-            height: auto;
-            animation: sway 5s ease-in-out infinite;
+            height: 100%;
+            max-width: none;
+            top: 10px; /* Position the SVG at the top */
         }
 
         @keyframes sway {
@@ -55,19 +57,32 @@
             stroke: yellow;
         }
 
-        /* Styling for the text below the flower (signature-like) */
         .text {
             font-family: 'Dancing Script', cursive; /* Handwritten style */
             font-size: 25px;
             fill: white;
             text-anchor: middle;
             transform: translateY(20px) rotate(-10deg); /* Adds slight rotation and spacing */
+            opacity: 0; /* Initially hidden */
         }
     </style>
     <!-- Add the Dancing Script font for a cursive, signature look -->
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Audio element to play the song in a loop, autoplay enabled -->
+    <audio id="background-music" src="love.mp3" type="audio/mp3" autoplay loop></audio>
+    <script>
+        // Wait for the window to load completely
+        window.onload = function() {
+            // Get the audio element by its ID
+            var audio = document.getElementById('background-music');
+            // Play the audio when the page loads
+            audio.play();
+        };
+    </script>
+    
+
     <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
         <!-- Stem and Leaves for Flower 1 -->
         <path class="stem" id="stem1" d="M250,400 C260,300 240,200 250,100" />
@@ -120,7 +135,8 @@
         <circle class="center" cx="400" cy="50" r="20" />
 
         <!-- Text below the flower, positioned at bottom-right -->
-        <text class="text" x="380" y="460">To the sweetest person</text>
+        <text class="text" x="380" y="480">To the sweetest person &#9829;</text>
+
     </svg>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -172,7 +188,14 @@
             duration: 1.5,
             scale: 1,
             ease: "elastic.out(1, 0.5)"
-        });
+        })
+
+        // Text animation - writing effect
+        .to(".text", {
+            opacity: 1,
+            duration: 3,
+            ease: "power2.out"
+        })
     </script>
 </body>
 </html>
